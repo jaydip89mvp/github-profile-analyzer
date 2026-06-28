@@ -1,0 +1,120 @@
+{
+  "info": {
+    "name": "GitHub Profile Analyzer API",
+    "description": "Collection for testing the GitHub Profile Analyzer API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Home",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Get API info and available endpoints"
+      }
+    },
+    {
+      "name": "Analyze Profile - torvalds",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profile/torvalds",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile", "torvalds"]
+        },
+        "description": "Fetch torvalds profile from GitHub API, store in DB, and return the result"
+      }
+    },
+    {
+      "name": "Analyze Profile - octocat",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profile/octocat",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile", "octocat"]
+        },
+        "description": "Fetch octocat profile from GitHub API, store in DB, and return the result"
+      }
+    },
+    {
+      "name": "Analyze Profile - Invalid Username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profile/--invalid--",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile", "--invalid--"]
+        },
+        "description": "Test with an invalid GitHub username format"
+      }
+    },
+    {
+      "name": "Analyze Profile - Non-existent User",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profile/thisuserdoesnotexist99999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profile", "thisuserdoesnotexist99999"]
+        },
+        "description": "Test with a username that does not exist on GitHub"
+      }
+    },
+    {
+      "name": "Get All Profiles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profiles",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profiles"]
+        },
+        "description": "Get all stored profiles sorted by latest analyzed first"
+      }
+    },
+    {
+      "name": "Get Profile by Username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profiles/torvalds",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profiles", "torvalds"]
+        },
+        "description": "Get a single stored profile from the database"
+      }
+    },
+    {
+      "name": "Get Profile - Not Found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/profiles/nonexistentuser",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "profiles", "nonexistentuser"]
+        },
+        "description": "Test fetching a profile that hasn't been analyzed yet"
+      }
+    }
+  ]
+}
