@@ -22,7 +22,7 @@ const fetchGithubProfile = async (username) => {
     following: data.following,
     avatar_url: data.avatar_url,
     profile_url: data.html_url,
-    account_created_at: data.created_at,
+    account_created_at: new Date(data.created_at).toISOString().slice(0, 19).replace("T", " "),
   };
 };
 

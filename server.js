@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const { initializeDatabase } = require("./config/db");
 const profileRoutes = require("./routes/profileRoutes");
 
 const app = express();
@@ -24,6 +25,15 @@ app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await initializeDatabase();
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error.message);
+    process.exit(1);
+  }
+};
+startServer();
